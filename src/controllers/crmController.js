@@ -22,3 +22,15 @@ export const getContacts = async (req,res) => {
         res.status(500).send(err);
     }
 }
+
+export const getContactByName = async (req, res) => {
+    try {
+        const contact = await Contact.findById(req.params.contactId);
+        if (!contact) {
+            return res.status(404).json({message: 'Contact not found'});
+        }
+        res.status(200).json(contact)
+    } catch (e) {
+        res.status(500).send(e);
+    }
+}
