@@ -34,3 +34,12 @@ export const getContactByName = async (req, res) => {
         res.status(500).send(e);
     }
 }
+
+export const updateContact = async (req, res) => {
+    try {
+        const contact = await Contact.findOneAndUpdate({_id: req.params.contactId}, req.body, { new: true });
+        res.status(201).json(contact)
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
